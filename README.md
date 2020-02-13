@@ -12,6 +12,7 @@ Ex : `DatePicker` object (Dynamic Fragment), which is an isnstance of `DialogFag
 <h4>Adding Fragments statically</h4>
 First, you need to create a fragment. (Use android studio's pre build templates). Give a name to the fragment (Ex:MessageFragment). Add the following XML code to the activity's layout file where you want to add the fragment.
 
+
 ```XML
 <fragment
         android:layout_width="0dp"
