@@ -5,7 +5,7 @@ There is two ways of adding fragment to an activity
  1. Adding Fragments Dynamically
  2. Adding Fragments statically (Remain on the screen during the entire lifecyle of an activity)
 
-Ex : DatePicker object (Dynamic Fragment), which is an isnstance of DialogFagment, a subclass of Fragment
+Ex : `DatePicker` object (Dynamic Fragment), which is an isnstance of `DialogFagment`, a subclass of `Fragment`
 
  Fragment can retain an instance of its data after a configuration change (such as changing the orientation). This feature makes a Fragment useful as a UI component, as compared to using separate Views. While an Activity is destroyed and recreated when a device's configuration changes, a Fragment is not destroyed.
 
@@ -23,3 +23,94 @@ Ex : DatePicker object (Dynamic Fragment), which is an isnstance of DialogFagmen
         app:layout_constraintTop_toTopOf="parent" />
 ```
 <img src="https://github.com/Pasan99/Fragments/blob/master/FragmentScreenshots/ArticalBeforeLike.png" width="300">     <img src="https://github.com/Pasan99/Fragments/blob/master/FragmentScreenshots/ArticleAfterLike.png" width="300">
+
+<h4>Dynamically Add fragments from layout XML file</h4>
+We need to use FragmentTransaction to add, remove or replace Fragment from an activity.
+
+The best practice for instantiating the Fragment in the Activity is to provide a `newinstance()` factory method in the Fragment. Follow these steps to add the `newinstance()` method to Fragment and instantiate the Fragment in Activity. You will also add the `displayFragment()` and `closeFragment()` methods, and use Fragment transactions
+
+ 1. Open Fragment, and add the following method for instantiating and returning the Fragment to the Activity:
+ ```kotlin
+ companion object{
+        fun newInstance() : RateFragment{
+            return RateFragment()
+        }
+    }
+```
+ 2. Open Activity, and create the following `displayRatingFragment()` method to instantiate and open `RateFragment`. It starts by creating an instance of `RateFragment` by calling the `newInstance()` method in `RateFragment`:
+```kotlin
+private fun displayRatingFragment(){
+        val rateFragment = RateFragment.newInstance()
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.add(R.id.fragment_container, rateFragment)
+            .addToBackStack(null)
+            .commit()
+        isRatingFragmentDisplayed = true
+        
+        // Set the listener created in Fragment
+        rateFragment.setOnCloseListener(object : RateFragment.OnCloseListener{
+            @SuppressLint("SetTextI18n")
+            override fun onRated(rating: Float) {
+                rate_result.visibility = View.VISIBLE
+                rate_result.text = "$rating ★"
+            }
+
+            override fun onClose(button: Button) {
+                closeRatingFragment()
+            }
+
+        })
+ }
+ private fun closeRatingFragment(){
+        val rateFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
+        if (rateFragment != null){
+            val fragmentTransaction = supportFragmentManager.beginTransaction()
+            fragmentTransaction.remove(rateFragment).commit()
+            isRatingFragmentDisplayed = false
+        }
+ }
+ ```
+Using `supportFragmentManager`, use `beginTransaction()` to get an instance of `FragmentTransaction`. `FragmentTransaction` can be used to add a new fragment. I add `OnCloseListener` (Interface was created in `RateFragment`) to identify the user interactions on `RateFragment`.
+
+<h5>RateFragment</h5>
+
+```kotlin
+class RateFragment : Fragment() {
+
+    private lateinit var closeListener : OnCloseListener
+
+    companion object{
+        fun newInstance() : RateFragment{
+            return RateFragment()
+        }
+    }
+
+    fun setOnCloseListener(listener: OnCloseListener){
+        this.closeListener = listener
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        val view = inflater.inflate(R.layout.fragment_rate, container, false)
+        val closeBtn = view.findViewById<Button>(R.id.close_btn)
+        val ratingBar = view.findViewById<RatingBar>(R.id.ratingBar)
+        closeBtn.setOnClickListener {
+            closeListener.onClose(it as Button)
+        }
+        ratingBar.setOnRatingBarChangeListener { _, rating, _ ->
+            closeListener.onRated(rating)
+        }
+        return view
+    }
+
+    interface OnCloseListener{
+        fun onClose(button: Button)
+        fun onRated(rating: Float)
+    }
+
+}
+```
+ 
