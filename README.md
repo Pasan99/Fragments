@@ -10,7 +10,7 @@ Ex : `DatePicker` object (Dynamic Fragment), which is an isnstance of `DialogFag
  Fragment can retain an instance of its data after a configuration change (such as changing the orientation). This feature makes a Fragment useful as a UI component, as compared to using separate Views. While an Activity is destroyed and recreated when a device's configuration changes, a Fragment is not destroyed.
 
 <h4>Adding Fragments statically</h4>
-First, you need to create a fragment. (Use android studio's pre build templates). Give a name to the fragment (Ex:MessageFragment). Add the following XML code to the activity's layout file where you want to add the fragment.
+First, you need to create a fragment. (Use android studio's pre build templates). To create a blank Fragment, expand app > java in Project: Android view, select the folder containing the Java code for your app, and choose `File > New > Fragment > Fragment (Blank)`. Give a name to the fragment (Ex:MessageFragment). Add the following XML code to the activity's layout file where you want to add the fragment.
 
 
 ```XML
@@ -116,4 +116,24 @@ class RateFragment : Fragment() {
 }
 ```
 <img src="https://github.com/Pasan99/Fragments/blob/master/FragmentScreenshots/BeforeRate.png" width="250"/>   <img src="https://github.com/Pasan99/Fragments/blob/master/FragmentScreenshots/OnRating.png" width="250"/>   <img src="https://github.com/Pasan99/Fragments/blob/master/FragmentScreenshots/AfterRated.png" width="250"/>   
+
+With FragmentManager your code can perform the following Fragment transactions while the app runs, using FragmentTransaction methods: 
+- Add a Fragment using add().
+- Remove a Fragment using remove().
+- Replace a Fragment with another Fragment using replace().
  
+There are also a few subclasses that you might want to extend, instead of the base Fragment class:
+
+<h5>DialogFragment</h5>
+Displays a floating dialog. Using this class to create a dialog is a good alternative to using the dialog helper methods in the Activity class, because you can incorporate a fragment dialog into the back stack of fragments managed by the activity, allowing the user to return to a dismissed fragment.
+
+<h5>ListFragment</h5>
+Displays a list of items that are managed by an adapter (such as a SimpleCursorAdapter), similar to ListActivity. It provides several methods for managing a list view, such as the onListItemClick() callback to handle click events. (Note that the preferred method for displaying a list is to use RecyclerView instead of ListView. In this case you would need to create a fragment that includes a RecyclerView in its layout. See Create a List with RecyclerView to learn how.)
+
+<h5>PreferenceFragmentCompat</h5>
+Displays a hierarchy of Preference objects as a list. This is used to create a settings screen for your application.
+
+Tip: For each fragment transaction, you can apply a transition animation, by calling setTransition() before you commit.
+<br>
+`More about fragments`
+https://developer.android.com/guide/components/fragments.html
