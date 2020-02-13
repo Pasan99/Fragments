@@ -9,7 +9,8 @@ Ex : `DatePicker` object (Dynamic Fragment), which is an isnstance of `DialogFag
 
  Fragment can retain an instance of its data after a configuration change (such as changing the orientation). This feature makes a Fragment useful as a UI component, as compared to using separate Views. While an Activity is destroyed and recreated when a device's configuration changes, a Fragment is not destroyed.
 
-<h4>Statically Add fragments from layout XML file</h4>
+<h4>Adding Fragments statically</h4>
+First, you need to create a fragment. (Use android studio's pre build templates). Give a name to the fragment (Ex:MessageFragment). Add the following XML code to the activity's layout file where you want to add the fragment.
 
 ```XML
 <fragment
@@ -24,7 +25,7 @@ Ex : `DatePicker` object (Dynamic Fragment), which is an isnstance of `DialogFag
 ```
 <img src="https://github.com/Pasan99/Fragments/blob/master/FragmentScreenshots/ArticalBeforeLike.png" width="300">     <img src="https://github.com/Pasan99/Fragments/blob/master/FragmentScreenshots/ArticleAfterLike.png" width="300">
 
-<h4>Dynamically Add fragments from layout XML file</h4>
+<h4>Adding Fragments Dynamically</h4>
 We need to use FragmentTransaction to add, remove or replace Fragment from an activity.
 
 The best practice for instantiating the Fragment in the Activity is to provide a `newinstance()` factory method in the Fragment. Follow these steps to add the `newinstance()` method to Fragment and instantiate the Fragment in Activity. You will also add the `displayFragment()` and `closeFragment()` methods, and use Fragment transactions
