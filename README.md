@@ -113,4 +113,5 @@ class RateFragment : Fragment() {
 
 }
 ```
+<img src="https://github.com/Pasan99/Fragments/blob/master/FragmentScreenshots/BeforeRate.png" width="250"/>   <img src="https://github.com/Pasan99/Fragments/blob/master/FragmentScreenshots/OnRating.png" width="250"/>   <img src="https://github.com/Pasan99/Fragments/blob/master/FragmentScreenshots/AfterRated.png" width="250"/>   
  
