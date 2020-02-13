@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Fragments</string>
+    <string name="fragments">Fragments</string>
+    <string name="dynamic_fragments">Dynamic Fragments</string>
+    <string name="static_fragments">Static Fragments</string>
+    <string name="created_by_pasan_manohara">Created by Pasan Manohara</string>
+    <string name="having_fun">Having Fun</string>
+    <string name="message">Like the post?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="yes_message">ARTICLE: Liked</string>
+    <string name="no_message">ARTICLE: Thanks</string>
+    <string name="article_body">Need an instant pick-me-up? You just can\'t help smiling when you bite into a slice of bright, citrusy, refreshing lemon cake. Here are 21 luscious lemon cake recipes that\'ll lift your mood like sunshine on a plate.</string>
 </resources>
